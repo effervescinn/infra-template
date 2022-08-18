@@ -6,7 +6,7 @@ jobs:
     deploy:
       runs-on: ubuntu-latest
       env:
-          id: 123
+          id: ${{ secrets.ORG_ID }}
           authToken: ${{ secrets.AUTH_TOKEN }}
       steps:
         - uses: actions/checkout@v3
