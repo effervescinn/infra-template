@@ -1,13 +1,10 @@
-import fetch from 'node-fetch'
+import fetch from "node-fetch";
 
 fetch("https://api.tracker.yandex.net/v2/issues/INFRA-47/comments", {
     method: "POST",
     headers: {
-        Authorization:
-            "OAuth ##", // тут будет токен
-        "X-Org-ID": "##", // тут будет id
+        Authorization: `OAuth ${process.env.authToken}`,
+        "X-Org-ID": `${process.env.id}`,
     },
     body: JSON.stringify({ text: "Тестовый комментарий" }),
-}).then((res) => {
-    console.log(res);
 });
