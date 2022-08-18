@@ -5,14 +5,14 @@ on: [push, workflow_dispatch]
 jobs:
     deploy:
       runs-on: ubuntu-latest
+      env:
+          id: 123
+          authToken: ${{ secrets.AUTH_TOKEN }}
       steps:
         - uses: actions/checkout@v3
         - uses: actions/setup-node@v3
           with:
             node-version: '16.16.0'
-          env:
-            id: ${{ secrets.ORG_ID }}
-            authToken: ${{ secrets.AUTH_TOKEN }}
         - run: npm ci
         - run: node ./fetch.js
 
