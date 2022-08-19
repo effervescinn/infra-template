@@ -8,7 +8,7 @@ on:
 
 jobs:
     deploy:
-        uses: "./github/workflows/main.yml"
+        uses: "./github/workflows/main.yml@v1"
         runs-on: ubuntu-latest
         env:
             id: ${{ secrets.ORG_ID }}
