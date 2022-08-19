@@ -38,7 +38,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref_type == 'tag'
     needs: test
-    runs-on: ubuntu-latest
     env:
         id: ${{ secrets.ORG_ID }}
         authToken: ${{ secrets.AUTH_TOKEN }}
