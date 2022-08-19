@@ -11,4 +11,4 @@ else
   commitsInfo=`git log --pretty=tformat:"%H %an %s" ${tagsArr[0]}...${tagsArr[1]}`
 fi
 
-node fetch.js "$commitsInfo" ${tagsArr[0]}
+node setRelease.js "$commitsInfo" ${tagsArr[0]}
