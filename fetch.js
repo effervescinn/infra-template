@@ -1,19 +1,9 @@
 import fetch from "node-fetch";
 
-function getCommitsInfo(commitsInfo) {
-    const commits = [];
-    const tagAuthor = commitsInfo[1];
+function getReleaseInfo(commits, releaseTag) {
+    const tagAuthor = commits.split(' ')[1];
 
-    for (let i = 0; i < commitsInfo.length; i += 3) {
-        const commit = `${commitsInfo[i]} ${commitsInfo[i + 1]} ${
-            commitsInfo[i + 2]
-        }`;
-        commits.push(commit);
-    }
-
-    const commitsStr = commits.join("\n");
-
-    return { commits: commitsStr, tagAuthor };
+    return { commits, tagAuthor, releaseTag: releaseTag.split("-")[1] };
 }
 
 function getDate() {
@@ -22,10 +12,7 @@ function getDate() {
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
-const commitsInfo = getCommitsInfo(
-    process.argv.slice(2, process.argv.length - 1)
-);
-const releaseNum = process.argv[process.argv.length - 1].split("-")[1];
+const releaseInfo = getReleaseInfo(process.argv[2], process.argv[3]);
 const date = getDate();
 
 fetch("https://api.tracker.yandex.net/v2/issues/INFRA-47", {
@@ -36,10 +23,10 @@ fetch("https://api.tracker.yandex.net/v2/issues/INFRA-47", {
         "Content-Type": "application/json",
     },
     body: JSON.stringify({
-        summary: `Релиз №${releaseNum} от ${date}`,
-        description: `Ответственный за релиз: ${commitsInfo.tagAuthor}
+        summary: `Релиз №${releaseInfo.releaseTag} от ${date}`,
+        description: `Ответственный за релиз: ${releaseInfo.tagAuthor}
         
         Коммиты, попавшие в релиз:
-        ${commitsInfo.commits}`,
+        ${releaseInfo.commits}`,
     }),
 });

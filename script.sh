@@ -1,14 +1,14 @@
 #!/bin/bash
 
 tagsCount=`git tag | wc -l`
-tags=`git tag`
+tags=`git tag --sort=-creatordate`
 tagsArr=(${tags// / })
 
 if [[ $tagsCount == "1" ]] 
 then
-  commitsInfo=`git log --pretty=format:"%h %an %s" ${tagsArr[${tagsCount} - 1]}`
+  commitsInfo=`git log --pretty=format:"%H %an %s" ${tagsArr[0]}`
 else
-  commitsInfo=`git log --pretty=format:"%h %an %s" ${tagsArr[${tagsCount} - 1]}...${tagsArr[${tagsCount} - 2]}`
+  commitsInfo=`git log --pretty=tformat:"%H %an %s" ${tagsArr[0]}...${tagsArr[1]}`
 fi
 
-node fetch.js $commitsInfo ${tagsArr[${tagsCount} - 1]}
+node fetch.js "$commitsInfo" ${tagsArr[0]}
