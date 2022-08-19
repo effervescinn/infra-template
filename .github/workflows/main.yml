@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16.16.0'
-      - run: npm ci
+      # - run: npm ci
       - run: echo "hello"
   #     - run: npm run test
         
@@ -47,5 +47,5 @@ jobs:
         with:
           node-version: '16.16.0'
       - run: npm ci
-      - run: node ./fetch.js
+      - run: bash script.sh
         
