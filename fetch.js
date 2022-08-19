@@ -8,6 +8,4 @@ fetch("https://api.tracker.yandex.net/v2/issues/INFRA-47/comments", {
         "Content-Type": "application/json",
     },
     body: JSON.stringify({ text: "Тестовый комментарий" }),
-}).then(() => {
-    console.log("3571" + process.env.id);
 });
