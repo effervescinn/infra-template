@@ -16,4 +16,4 @@ node setRelease.js "$commitsInfo"
 
 # docker build . -t $tag
 
-# node comment.js
+node comment.js
