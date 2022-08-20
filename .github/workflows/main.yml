@@ -3,50 +3,49 @@ name: CI
 on: [push, workflow_dispatch]
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: "16.16.0"
-            # - run: npm ci
-            - run: echo "hello"
-    #     - run: npm run test
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.16.0"
+      - run: npm ci
+      - run: npm run test
 
-    # lint:
-    #   runs-on: ubuntu-latest
-    #   steps:
-    #     - uses: actions/checkout@v3
-    #     - uses: actions/setup-node@v3
-    #       with:
-    #         node-version: '16.16.0'
-    #     - run: npm ci
-    #     - run: npm run lint
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.16.0"
+      - run: npm ci
+      - run: npm run lint
 
-    # ts:
-    #   runs-on: ubuntu-latest
-    #   steps:
-    #     - uses: actions/checkout@v3
-    #     - uses: actions/setup-node@v3
-    #       with:
-    #         node-version: '16.16.0'
-    #     - run: npm ci
-    #     - run: npm run ts
+  ts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.16.0"
+      - run: npm ci
+      - run: npm run ts
 
-    deploy:
-        runs-on: ubuntu-latest
-        if: github.ref_type == 'tag'
-        needs: test
-        env:
-            id: ${{ secrets.ORG_ID }}
-            authToken: ${{ secrets.AUTH_TOKEN }}
-            author: ${{ github.actor }}
-            tag: ${{github.ref_name}}
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: "16.16.0"
-            - run: npm ci
-            - run: bash ./script.sh
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref_type == 'tag'
+    needs: test
+    env:
+      id: ${{ secrets.ORG_ID }}
+      authToken: ${{ secrets.AUTH_TOKEN }}
+      author: ${{ github.actor }}
+      tag: ${{github.ref_name}}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.16.0"
+      - run: npm ci
+      - run: bash ./script.sh
