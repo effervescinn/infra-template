@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-console.log("Отправка запроса на комментарий...");
+console.log("Отправка запроса на оставление комментария...");
 
 fetch("https://api.tracker.yandex.net/v2/issues/INFRA-47/comments", {
   method: "POST",
