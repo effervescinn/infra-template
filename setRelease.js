@@ -11,6 +11,8 @@ const author = process.env.author;
 const releaseTag = process.env.tag.split("-")[1];
 const date = getDate();
 
+console.log('Отправка запроса на изменение тикета...')
+
 fetch("https://api.tracker.yandex.net/v2/issues/INFRA-47", {
   method: "PATCH",
   headers: {
@@ -25,6 +27,8 @@ fetch("https://api.tracker.yandex.net/v2/issues/INFRA-47", {
     Коммиты, попавшие в релиз:
     ${commits}`,
   }),
+}).then(() => {
+  console.log("Информация о релизе добавлена в тикет");
 }).catch((err) => {
   console.error("Ошибка при выполнении запроса");
   throw err;

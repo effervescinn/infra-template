@@ -5,6 +5,7 @@ tags=`git tag --sort=-creatordate`
 tagsArr=(${tags// / })
 
 echo "Getting info about commits..."
+
 if [[ $tagsCount == "1" ]] 
 then
   commitsInfo=`git log --pretty=format:"%H %an %s" ${tagsArr[0]}`
