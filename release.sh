@@ -4,7 +4,7 @@ tagsCount=`git tag | wc -l`
 tags=`git tag --sort=-creatordate`
 tagsArr=(${tags// / })
 
-echo "Getting info about commits..."
+echo "Получение информации о коммитах..."
 
 if [[ $tagsCount == "1" ]] 
 then
