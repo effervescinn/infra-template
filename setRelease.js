@@ -1,21 +1,14 @@
 import fetch from "node-fetch";
 
-function getReleaseInfo(commits, releaseTag) {
-    const tagAuthor = commits.split(" ")[1];
-
-    return { commits, tagAuthor, releaseTag: releaseTag.split("-")[1] };
-}
-
 function getDate() {
     const date = new Date();
-
+    
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
-const { commits, tagAuthor, releaseTag } = getReleaseInfo(
-    process.argv[2],
-    process.argv[3]
-);
+const commits = process.argv[2];
+const author = process.env.author;
+const releaseTag = process.env.tag.split("-")[1]
 const date = getDate();
 
 fetch("https://api.tracker.yandex.net/v2/issues/INFRA-47", {
@@ -27,7 +20,7 @@ fetch("https://api.tracker.yandex.net/v2/issues/INFRA-47", {
     },
     body: JSON.stringify({
         summary: `Релиз №${releaseTag} от ${date}`,
-        description: `Ответственный за релиз: ${tagAuthor}
+        description: `Ответственный за релиз: ${author}
         
         Коммиты, попавшие в релиз:
         ${commits}`,

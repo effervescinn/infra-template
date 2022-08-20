@@ -11,8 +11,8 @@ else
   commitsInfo=`git log --pretty=tformat:"%H %an %s" ${tagsArr[0]}...${tagsArr[1]}`
 fi
 
-node setRelease.js "$commitsInfo" ${tagsArr[0]}
+node setRelease.js "$commitsInfo"
 
-docker build . -t ${tagsArr[0]}
+docker build . -t $tag
 
-node comment.js ${tagsArr[0]}
+node comment.js
