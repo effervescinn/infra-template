@@ -12,3 +12,7 @@ else
 fi
 
 node setRelease.js "$commitsInfo" ${tagsArr[0]}
+
+docker build . -t ${tagsArr[0]}
+
+node comment.js ${tagsArr[0]}
