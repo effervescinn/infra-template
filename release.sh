@@ -12,13 +12,8 @@ else
   commitsInfo=`git log --pretty=tformat:"%H %an %s" ${tagsArr[0]}...${tagsArr[1]}`
 fi
 
-echo $tags 
-echo $tagsCount
-echo ${tagsArr[0]} ${tagsArr[1]}
-echo $commitsInfo
+node setRelease.js "$commitsInfo"
 
-# node setRelease.js "$commitsInfo"
+docker build . -t $tag
 
-# docker build . -t $tag
-
-# node comment.js
+node comment.js
