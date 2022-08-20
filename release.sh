@@ -15,7 +15,7 @@ fi
 echo $tags 
 echo $tagsCount
 echo ${tagsArr[0]} ${tagsArr[1]}
-echo $commitsInfo
+# echo $commitsInfo
 
 # node setRelease.js "$commitsInfo"
 
